@@ -1,11 +1,10 @@
-import {
-  WorkoutTypes,
-  UserWorkoutListDataModel,
-} from './../model/workout.list.model';
 import { Injectable } from '@angular/core';
-import { UserWorkoutInputDataModel } from '../model/workout.model';
+
 import { UtilService } from '../../common/services/util.service';
 import { WorkoutConfig } from '../../common/constants/workout.config';
+
+import { UserWorkoutListDataModel } from './../model/workout.list.model';
+import { UserWorkoutInputDataModel } from '../model/workout.model';
 
 @Injectable()
 export class WorkoutApiServices {
@@ -56,8 +55,11 @@ export class WorkoutApiServices {
 
   getAllWorkoutData(): UserWorkoutListDataModel[] {
     // Retrieve data from localStorage
-    let allWorkoutData: UserWorkoutListDataModel[] =
-      UtilService.getItem(WorkoutConfig.WORKOUT_LIST_KEY) || [];
+    let allWorkoutData: UserWorkoutListDataModel[] = UtilService.getItem(
+      WorkoutConfig.WORKOUT_LIST_KEY
+    );
+
+    if (!allWorkoutData) return [];
 
     return allWorkoutData;
   }

@@ -1,5 +1,33 @@
-<div
-  class="flex items-center justify-center flex-1 w-full min-h-screen pt-[50px]"
->
-  user's workout list
+<div class="w-full min-h-screen pt-[50px]">
+  <h2 class="text-center text-[28px] text-[#ff2e62] mb-6 mt-4 font-semibold">
+    User's Workout List
+  </h2>
+
+  <div class="w-[90%] mx-auto shadow-md max-w-[1240px] shadow-[#d3d3d3] rounded-md overflow-hidden">
+    <table class="w-full">
+      <thead class="border-b-[1px] border-[#cecbcb] text-[#ff2e62] bg-blue-50">
+        <tr>
+          <th class="p-2" *ngFor="let name of tableColumnHeaders">
+            {{ name }}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody *ngIf="formattedWorkoutList && formattedWorkoutList.length">
+        <tr
+          *ngFor="let item of formattedWorkoutList"
+          class="text-center border-b-[1px] border-[#c4c4c4]"
+        >
+          <td class="p-3">{{ item.userName }}</td>
+          <td class="p-3">{{ item.workouts }}</td>
+          <td class="p-3">{{ item.totalWorkouts }}</td>
+          <td class="p-3">{{ item.totalWorkoutDuration }}</td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="!formattedWorkoutList">
+        <td colspan="4">No data found</td>
+      </tbody>
+    </table>
+  </div>
 </div>
