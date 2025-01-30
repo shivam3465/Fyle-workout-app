@@ -3,9 +3,68 @@
     User's Workout List
   </h2>
 
-  <div class="w-[90%] mx-auto shadow-md max-w-[1240px] shadow-[#d3d3d3] rounded-md overflow-hidden">
+  <!-- filter section  -->
+  <div
+    class="w-[90%] mx-auto max-w-[1240px] flex items-center justify-between gap-4 py-4 border-b-[1px] border-gray-50 shadow-md shadow-[#d3d3d3] rounded-t-md bg-blue-50"
+  >
+    <div class="font-semibold text-xl ml-2">Filters</div>
+
+    <div class="flex items-center gap-8">
+      <!-- Filter by username -->
+      <div class="flex items-center gap-3">
+        <label for="userName" class="mb-1">UserName</label>
+        <input
+          type="text"
+          id="userName"
+          placeholder="Search username"
+          [(ngModel)]="filter.userName"
+          (ngModelChange)="applyFilter()"
+          class="border-[#cccccc] bg-white focus:border-[#ff2e62] border-[1px] outline-0 rounded px-2 py-1 w-[250px]"
+        />
+      </div>
+
+      <!-- Filter by workout type -->
+      <div class="flex items-center gap-3">
+        <label for="workoutType" class="mb-1">Workout Type</label>
+        <ng-select
+          [items]="workoutTypeOptions"
+          bindLabel="displayName"
+          bindValue="name"
+          [(ngModel)]="filter.workoutType"
+          [multiple]="true"
+          appendTo="body"
+          (change)="applyFilter()"
+          placeholder="Select Workout Types"
+          class="border-[#cccccc] bg-white border-[1px] outline-0 rounded px-2 py-1 min-w-[100px]"
+        >
+        </ng-select>
+
+        <!-- <select
+          id="workoutType"
+          [(ngModel)]="filter.workoutType"
+          (ngModelChange)="applyFilter()"
+          class="border-[#cccccc] bg-white border-[1px] outline-0 rounded px-2 py-1"          
+        >
+          <option value="All" [defaultSelected]="true">All</option>
+          <option
+            [value]="option.name"
+            *ngFor="let option of workoutTypeOptions"
+          >
+            {{ option.displayName }}
+          </option>
+        </select> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- user table section  -->
+  <div
+    class="w-[90%] mx-auto max-w-[1240px] shadow-md shadow-[#d3d3d3] rounded-b-md overflow-hidden"
+  >
     <table class="w-full">
-      <thead class="border-b-[1px] border-[#cecbcb] text-[#ff2e62] bg-blue-50">
+      <thead
+        class="border-b-[1px] border-t-[1px] border-t-[#e4e4e4] border-[#cecbcb] text-[#ff2e62] bg-blue-50"
+      >
         <tr>
           <th class="p-2" *ngFor="let name of tableColumnHeaders">
             {{ name }}
@@ -25,7 +84,7 @@
         </tr>
       </tbody>
 
-      <tbody *ngIf="!formattedWorkoutList">
+      <tbody *ngIf="!formattedWorkoutList || !formattedWorkoutList.length">
         <td colspan="4">No data found</td>
       </tbody>
     </table>

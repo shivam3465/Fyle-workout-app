@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserWorkoutInputDataModel } from '../model/workout.model';
 import { WorkoutApiServices } from '../services/workout.api.services';
+import { WorkoutConfig } from '../../common/constants/workout.config';
 
 @Component({
   selector: 'app-workout-home',
@@ -10,12 +11,7 @@ import { WorkoutApiServices } from '../services/workout.api.services';
 export class WorkoutHomeComponent {
   workoutForm!: FormGroup;
   //used for rendering the workouts type options
-  workoutTypeOptions = [
-    { name: 'Running', displayName: 'RUNNING' },
-    { name: 'Cycling', displayName: 'CYCLING' },
-    { name: 'Yoga', displayName: 'YOGA' },
-    { name: 'Swimming', displayName: 'SWIMMING' },
-  ];
+  workoutTypeOptions = WorkoutConfig.WORKOUT_TYPE_OPTION;
 
   constructor(private workoutApiService: WorkoutApiServices) {}
 
