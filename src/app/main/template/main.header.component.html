@@ -1,13 +1,22 @@
-<div class="flex items-center border-b-[1px] border-[#9595955f] px-6">
+<div
+  class="flex items-center border-b-[1px] border-[#9595955f] px-6 h-[50px] w-full fixed bg-white"
+>
   <div class="py-3">
     <img src="/assets/logo.webp" alt="Logo" class="w-[30px]" />
   </div>
-  <div class="flex items-center justify-center w-full gap-4">
-    <a routerLink="/" class="py-2 px-4 cursor-pointer hover:text-[gray]"
+  <div class="flex items-center justify-center w-full gap-4 h-full">
+    <a
+      routerLink="/"
+      routerLinkActive="text-red-500 font-bold border-b-2 border-red-500 hover:text-red-500"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="py-2 px-4 cursor-pointer text-gray-400 hover:text-[gray] h-full flex items-center justify-center"
       >Home</a
     >
-    <a routerLink="/workout" class="py-2 px-4 cursor-pointer hover:text-[gray]"
-      >Workout</a
+    <a
+      routerLink="/report"
+      routerLinkActive="text-red-500 font-bold border-b-2 border-red-500 hover:text-red-500"
+      class="py-2 px-4 cursor-pointer text-gray-400 hover:text-[gray] h-full flex items-center justify-center"
+      >Report</a
     >
   </div>
 </div>
