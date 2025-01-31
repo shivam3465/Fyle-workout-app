@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
-.multiselect-dropdown .dropdown-btn{
-    padding: 6px 24px !important;
+.multiselect-dropdown .dropdown-btn {
+  padding: 6px 12px !important;
+  span{
+    padding-right: 2px !important;
+  }
+  .dropdown-multiselect__caret {
+    width: 30px !important;
+    height: 26px !important;
+    top: 5px !important;
+    right: -6px !important;
+    padding: 4px !important;
+    &:before {
+      border-width: 6px 6px 0 6px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .multiselect-dropdown .dropdown-btn {
+    padding: 6px 12px !important;
+
+    .selected-item-container .selected-item span {
+      font-size: 10px !important;
+    }
+    .dropdown-multiselect__caret {
+      width: 30px !important;
+      height: 26px !important;
+      top: 5px !important;
+      padding: 4px !important;
+      &:before {
+        border-width: 6px 6px 0 6px !important;
+      }
+    }
+  }
 }

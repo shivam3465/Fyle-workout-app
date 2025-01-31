@@ -5,19 +5,23 @@
     class="w-full max-w-[1400px] mx-auto flex items-center justify-center gap-4"
   >
     <div class="p-4 bg-[white] shadow-md shadow-[#e1e1e1] rounded-lg">
-      <h2 class="text-center text-2xl font-semibold text-[#ff2e62] mb-4">
+      <h2
+        class="text-center text-[20px] md:text-[28px] font-semibold text-[#ff2e62] mb-4"
+      >
         Workout progress
       </h2>
 
       <div class="flex items-center justify-between p-2 bg-[#eef9fc]">
         <div class="flex items-center justify-center gap-4">
-          <span class="text-[#5e5e5e] text-[15px]"> User Name: </span>
+          <span class="text-[#5e5e5e] text-[12px] md:text-[15px]">
+            User Name:
+          </span>
 
           <select
             id="userOption"
             (change)="onUserChange($event)"
             [(ngModel)]="userId"
-            class="p-1 outline-0 border-[1px] border-[#d9d9d9] rounded-md bg-white font-semibold text-[16px]"
+            class="p-1 outline-0 border-[1px] border-[#d9d9d9] rounded-md bg-white font-semibold text-[13px] md:text-[16px]"
             [disabled]="userList.length === 0"
           >
             <ng-container *ngIf="userList.length > 0; else noUsers">
@@ -32,7 +36,13 @@
 
             <!-- Template for no users -->
             <ng-template #noUsers>
-              <option value="" disabled>No Users Found</option>
+              <option
+                value=""
+                class="p-1 outline-0 border-[1px] border-[#d9d9d9] rounded-md bg-white font-semibold text-[13px] md:text-[16px]"
+                disabled
+              >
+                No Users Found
+              </option>
             </ng-template>
           </select>
         </div>

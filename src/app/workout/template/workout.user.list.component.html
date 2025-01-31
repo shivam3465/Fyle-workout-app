@@ -5,27 +5,39 @@
 
   <!-- filter section  -->
   <div
-    class="w-[90%] mx-auto max-w-[1240px] flex items-center justify-between gap-4 p-4 border-b-[1px] border-gray-50 shadow-md shadow-[#d3d3d3] rounded-t-lg bg-blue-50"
+    class="w-[90%] mx-auto max-w-[1240px] flex items-center justify-between gap-4 p-4 border-b-[1px] border-gray-50 shadow-md shadow-[#d3d3d3] rounded-t-lg bg-blue-50 text-[20px] md:text-[28px]"
   >
-    <div class="font-semibold text-xl ml-2">Filters</div>
+    <div class="font-semibold text-[14px] md:text-xl lg:ml-2">Filters</div>
 
-    <div class="flex items-center gap-8">
+    <div class="flex items-center flex-col md:flex-row gap-2 lg:gap-8">
       <!-- Filter by username -->
-      <div class="flex items-center gap-3">
-        <label for="userName" class="mb-1">User Name</label>
+      <div
+        class="flex justify-end md:justify-center items-center w-full md:w-auto gap-1 lg:gap-3"
+      >
+        <label
+          for="userName"
+          class="mb-1 text-[12px] md:text-[14px] lg:text-[16px]"
+          >User Name</label
+        >
         <input
           type="text"
           id="userName"
           placeholder="Search username"
           [(ngModel)]="filter.userName"
           (ngModelChange)="applyFilter()"
-          class="border-[#cccccc] bg-white focus:border-[#ff2e62] border-[1px] outline-0 rounded px-2 py-1 w-[250px]"
+          class="border-[#cccccc] bg-white focus:border-[#ff2e62] border-[1px] outline-0 rounded px-2 py-1 w-[150px] lg:w-[250px] text-[12px] md:text-[14px] lg:text-[16px]"
         />
       </div>
 
       <!-- Filter by workout type -->
-      <div class="flex items-center gap-3">
-        <label for="workoutType" class="mb-1">Workout Type</label>
+      <div
+        class="flex justify-end md:justify-center items-center w-full md:w-auto gap-1 lg:gap-3"
+      >
+        <label
+          for="workoutType"
+          class="mb-1 text-[12px] md:text-[14px] lg:text-[16px]"
+          >Workout Type</label
+        >
         <ng-multiselect-dropdown
           [placeholder]="'Select workouts'"
           [settings]="dropdownSettings"
@@ -34,7 +46,7 @@
           (onSelect)="onItemSelect($event)"
           (onSelectAll)="onItemSelect($event)"
           (onDeSelect)="onItemSelect($event)"
-          class="text-[14px] bg-white"
+          class="text-[12px] md:text-[14px] bg-white"
         >
         </ng-multiselect-dropdown>
       </div>
@@ -47,7 +59,7 @@
   >
     <table class="w-full">
       <thead
-        class="border-b-[1px] border-t-[1px] border-t-[#e4e4e4] border-[#cecbcb] text-[#ff2e62] bg-blue-50"
+        class="border-b-[1px] border-t-[1px] border-t-[#e4e4e4] border-[#cecbcb] text-[#ff2e62] bg-blue-50 text-[12px] md:text-[14px] lg:text-[16px]"
       >
         <tr>
           <th class="p-2" *ngFor="let name of tableColumnHeaders">
@@ -60,7 +72,7 @@
         <tr
           *ngFor="let item of formattedWorkoutList"
           (click)="goToUserDetails(item.id)"
-          class="text-center border-b-[1px] border-[#e8e8e8] hover:cursor-pointer hover:text-blue-400"
+          class="text-center border-b-[1px] border-[#e8e8e8] hover:cursor-pointer hover:text-blue-400 text-[12px] md:text-[14px] lg:text-[16px]"
         >
           <td class="p-3">{{ item.userName }}</td>
           <td class="p-3">{{ item.workouts }}</td>
