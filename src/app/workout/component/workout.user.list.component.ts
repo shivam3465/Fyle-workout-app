@@ -3,27 +3,30 @@ import { Component } from '@angular/core';
 import { UserWorkoutListDataModel } from '../model/workout.list.model';
 import { FormattedWorkoutListModel } from '../model/workout.model';
 import { WorkoutConfig } from '../../common/constants/workout.config';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-workout-user-list',
   templateUrl: '../template/workout.user.list.component.html',
+  standalone: false,
 })
 export class WorkoutUserListComponent {
-  cars = [
-    { id: 1, name: 'BMW Hyundai' },
-    { id: 2, name: 'Kia Tata' },
-    { id: 3, name: 'Volkswagen Ford' },
-    { id: 4, name: 'Renault Audi' },
-    { id: 5, name: 'Mercedes Benz Skoda' },
-  ];
-
-  selected = [{ id: 3, name: 'Volkswagen Ford' }];
-
   filter = {
     userName: '',
-    workoutType: [...WorkoutConfig.WORKOUT_TYPE_OPTION],
+    workoutType: WorkoutConfig.WORKOUT_TYPE_OPTION,
   };
-  workoutTypeOptions = WorkoutConfig.WORKOUT_TYPE_OPTION;
+  workoutTypeOptions: Array<any> = WorkoutConfig.WORKOUT_TYPE_OPTION;
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false, // Allow multiple selection
+    idField: 'name', // Field that represents the unique id
+    textField: 'displayName', // Field that represents the display text
+    selectAllText: 'All',
+    enableCheckAll: true,
+    unSelectAllText: 'Unselect All',
+    itemsShowLimit: 2, // Number of items to display in the dropdown before showing "Show All"
+    allowRemoteDataSearch: false,
+  };
 
   tableColumnHeaders: string[] = [
     'Name',
@@ -32,8 +35,8 @@ export class WorkoutUserListComponent {
     'Total Workout Minutes',
   ];
 
-  userWorkoutData!: UserWorkoutListDataModel[];
-  formattedWorkoutList!: FormattedWorkoutListModel[];
+  userWorkoutData!: UserWorkoutListDataModel[]; //actual data without filter
+  formattedWorkoutList!: FormattedWorkoutListModel[]; //filtered data
 
   constructor(private workoutApiServices: WorkoutApiServices) {}
 
@@ -41,6 +44,11 @@ export class WorkoutUserListComponent {
     //fetching the user work data on page load
     this.userWorkoutData = this.workoutApiServices.getAllWorkoutData();
     this.formatUserWorkoutData(this.userWorkoutData);
+    this.workoutTypeOptions = WorkoutConfig.WORKOUT_TYPE_OPTION;
+  }
+
+  onItemSelect(item: any) {
+    this.applyFilter();
   }
 
   //formats user's workout data as per table structure

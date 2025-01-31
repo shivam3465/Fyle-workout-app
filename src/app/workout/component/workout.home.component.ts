@@ -5,8 +5,9 @@ import { WorkoutApiServices } from '../services/workout.api.services';
 import { WorkoutConfig } from '../../common/constants/workout.config';
 
 @Component({
-  selector: 'app-workout-home',
-  templateUrl: '../template/workout.home.component.html',
+    selector: 'app-workout-home',
+    templateUrl: '../template/workout.home.component.html',
+    standalone: false
 })
 export class WorkoutHomeComponent {
   workoutForm!: FormGroup;

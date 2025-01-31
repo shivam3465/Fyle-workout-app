@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-workout-detail',
-  templateUrl: '../template/workout.detail.component.html',
+    selector: 'app-workout-detail',
+    templateUrl: '../template/workout.detail.component.html',
+    standalone: false
 })
 export class WorkoutDetailComponent {}

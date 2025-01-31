@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { WorkoutHomeComponent } from './component/workout.home.component';
 import { routing } from './workout.routes';
@@ -14,7 +15,13 @@ import { WorkoutDetailComponent } from './component/workout.detail.component';
     WorkoutUserListComponent,
     WorkoutDetailComponent,
   ],
-  imports: [routing, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    routing,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [WorkoutApiServices],
   exports: [],

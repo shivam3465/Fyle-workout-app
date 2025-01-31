@@ -5,7 +5,7 @@
 
   <!-- filter section  -->
   <div
-    class="w-[90%] mx-auto max-w-[1240px] flex items-center justify-between gap-4 py-4 border-b-[1px] border-gray-50 shadow-md shadow-[#d3d3d3] rounded-t-md bg-blue-50"
+    class="w-[90%] mx-auto max-w-[1240px] flex items-center justify-between gap-4 p-4 border-b-[1px] border-gray-50 shadow-md shadow-[#d3d3d3] rounded-t-md bg-blue-50"
   >
     <div class="font-semibold text-xl ml-2">Filters</div>
 
@@ -26,33 +26,17 @@
       <!-- Filter by workout type -->
       <div class="flex items-center gap-3">
         <label for="workoutType" class="mb-1">Workout Type</label>
-        <ng-select
-          [items]="workoutTypeOptions"
-          bindLabel="displayName"
-          bindValue="name"
+        <ng-multiselect-dropdown
+          [placeholder]="'Select workouts'"
+          [settings]="dropdownSettings"
+          [data]="workoutTypeOptions"
           [(ngModel)]="filter.workoutType"
-          [multiple]="true"
-          appendTo="body"
-          (change)="applyFilter()"
-          placeholder="Select Workout Types"
-          class="border-[#cccccc] bg-white border-[1px] outline-0 rounded px-2 py-1 min-w-[100px]"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onItemSelect($event)"
+          (onDeSelect)="onItemSelect($event)"
+          class="text-[14px] bg-white"
         >
-        </ng-select>
-
-        <!-- <select
-          id="workoutType"
-          [(ngModel)]="filter.workoutType"
-          (ngModelChange)="applyFilter()"
-          class="border-[#cccccc] bg-white border-[1px] outline-0 rounded px-2 py-1"          
-        >
-          <option value="All" [defaultSelected]="true">All</option>
-          <option
-            [value]="option.name"
-            *ngFor="let option of workoutTypeOptions"
-          >
-            {{ option.displayName }}
-          </option>
-        </select> -->
+        </ng-multiselect-dropdown>
       </div>
     </div>
   </div>
@@ -85,7 +69,9 @@
       </tbody>
 
       <tbody *ngIf="!formattedWorkoutList || !formattedWorkoutList.length">
-        <td colspan="4">No data found</td>
+        <td colspan="4" class="text-center p-8 font-semibold text-gray-500">
+          No data found
+        </td>
       </tbody>
     </table>
   </div>

@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.multiselect-dropdown .dropdown-btn{
+    padding: 6px 24px !important;
+}
