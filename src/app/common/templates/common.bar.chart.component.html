@@ -1,0 +1,14 @@
+<div class="w-full max-w-4xl mx-auto p-4 bg-white shadow-lg rounded-lg">
+  <h2 class="text-lg font-semibold text-gray-700 text-center mb-4">
+    {{ chartTitle }}
+  </h2>
+  <div class="w-full h-96">
+    <canvas
+      baseChart
+      [data]="chartDataConfig"
+      [options]="chartOptions"
+      [type]="chartType"
+    >
+    </canvas>
+  </div>
+</div>
