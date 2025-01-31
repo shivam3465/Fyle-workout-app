@@ -12,44 +12,30 @@
       <div class="flex items-center justify-between p-2 bg-[#eef9fc]">
         <div class="flex items-center justify-center gap-4">
           <span class="text-[#5e5e5e] text-[15px]"> User Name: </span>
-          <select
-            id="userOption"
-            (change)="onUserChange($event)"
-            [(ngModel)]="userId"
-            class="p-1 outline-0 border-[1px] border-[#d9d9d9] rounded-md bg-white font-semibold text-[18px]"
-          >
-            <option
-              *ngFor="let user of userList"
-              [selected]="userId == user.userId"
-              [value]="user.userId"
-            >
-              {{ user.userName }}
-            </option>
-          </select>
-          <!-- <span class="font-bold text-black text-[17px]">{{
-            userWorkoutData?.userName || "User"
-          }}</span> -->
-        </div>
 
-        <!-- <div class="flex items-center justify-center gap-4">
-          <label for="userOption" class="text-[#5e5e5e] text-[15px]"
-            >Change User</label
-          >
           <select
             id="userOption"
             (change)="onUserChange($event)"
             [(ngModel)]="userId"
-            class="p-1 outline-0 border-[1px] border-[#d9d9d9] rounded-md bg-white"
+            class="p-1 outline-0 border-[1px] border-[#d9d9d9] rounded-md bg-white font-semibold text-[16px]"
+            [disabled]="userList.length === 0"
           >
-            <option
-              *ngFor="let user of userList"
-              [selected]="userId == user.userId"
-              [value]="user.userId"
-            >
-              {{ user.userName }}
-            </option>
+            <ng-container *ngIf="userList.length > 0; else noUsers">
+              <option
+                *ngFor="let user of userList"
+                [value]="user.userId"
+                [selected]="userId == user.userId"
+              >
+                {{ user.userName }}
+              </option>
+            </ng-container>
+
+            <!-- Template for no users -->
+            <ng-template #noUsers>
+              <option value="" disabled>No Users Found</option>
+            </ng-template>
           </select>
-        </div> -->
+        </div>
       </div>
 
       <app-common-bar-chart
@@ -59,6 +45,7 @@
         [backgroundColors]="['rgba(75, 192, 192, 0.5)']"
         [borderColors]="['rgba(75, 192, 192, 1)']"
         [legendLabel]="'Minutes'"
+        [chartTitle]="workoutTitle"
       ></app-common-bar-chart>
     </div>
   </div>

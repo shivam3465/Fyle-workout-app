@@ -17,8 +17,10 @@
     <ng-container *ngFor="let i of pagesArray">
       <button
         (click)="jumpToPage(i)"
-        class="px-3 py-2 text-sm bg-white rounded-md border border-[#e4e4e4] hover:bg-[#ff2e62] hover:text-white cursor-pointer"
-        [ngClass]="{ 'bg-[#ff2e62] text-black': curPageNo === i }"
+        class="px-3 py-2 text-sm rounded-md border border-[#e4e4e4] hover:bg-[#ff2e62] hover:text-white cursor-pointer"
+        [ngClass]="
+          curPageNo === i ? 'bg-[#ff2e62] text-white' : 'text-black bg-white'
+        "
       >
         {{ i }}
       </button>
@@ -33,6 +35,8 @@
       Next
     </button>
   </div>
+
+  <p>Current Page: {{ curPageNo }}</p>
 
   <!-- Search & Go Button -->
   <div class="flex items-center gap-2">

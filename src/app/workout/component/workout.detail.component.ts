@@ -17,6 +17,7 @@ export class WorkoutDetailComponent implements OnInit {
   workoutLabels: string[] = [];
   workoutMinutes: number[] = [];
   userList: UserDataList[] = [];
+  workoutTitle!: string;
 
   constructor(
     private workoutApiServices: WorkoutApiServices,
@@ -44,6 +45,9 @@ export class WorkoutDetailComponent implements OnInit {
       this.workoutMinutes = this.userWorkoutData.workouts.map(
         (workout) => workout.minutes
       );
+      this.workoutTitle = this.userWorkoutData.userName + "'s workout detail";
+    } else {
+      this.workoutTitle = 'No such user found';
     }
   }
 
