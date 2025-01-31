@@ -1,4 +1,4 @@
-<div class="w-full min-h-screen pt-[50px]">
+<div class="w-full min-h-screen pt-[50px] mb-12">
   <h2 class="text-center text-[28px] text-[#ff2e62] mb-6 mt-4 font-semibold">
     User's Workout List
   </h2>
@@ -59,7 +59,7 @@
       <tbody *ngIf="formattedWorkoutList && formattedWorkoutList.length">
         <tr
           *ngFor="let item of formattedWorkoutList"
-          class="text-center border-b-[1px] border-[#c4c4c4]"
+          class="text-center border-b-[1px] border-[#e8e8e8]"
         >
           <td class="p-3">{{ item.userName }}</td>
           <td class="p-3">{{ item.workouts }}</td>
@@ -74,5 +74,19 @@
         </td>
       </tbody>
     </table>
+  </div>
+
+  <div
+    class="w-[90%] mx-auto max-w-[1240px] mt-8"
+    *ngIf="userWorkoutData.length > 5"
+  >
+    <app-common-pagination-bar
+      [curPageNo]="curPageNo"
+      [totalPages]="totalPages"
+      [pageSizeOptions]="[5, 10, 15, 20]"
+      [selectedPageSize]="pageSize"
+      (pageNumberChanged)="handlePageChange($event)"
+      (pageSizeChanged)="handlePageSizeChange($event)"
+    ></app-common-pagination-bar>
   </div>
 </div>

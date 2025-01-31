@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WorkoutApiServices } from './services/workout.api.services';
 import { WorkoutUserListComponent } from './component/workout.user.list.component';
 import { WorkoutDetailComponent } from './component/workout.detail.component';
+import { AppCommonModule } from '../common/common.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { WorkoutDetailComponent } from './component/workout.detail.component';
   imports: [
     routing,
     CommonModule,
+    AppCommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),

@@ -18,13 +18,13 @@ export class WorkoutUserListComponent {
   workoutTypeOptions: Array<any> = WorkoutConfig.WORKOUT_TYPE_OPTION;
 
   dropdownSettings: IDropdownSettings = {
-    singleSelection: false, // Allow multiple selection
-    idField: 'name', // Field that represents the unique id
-    textField: 'displayName', // Field that represents the display text
+    singleSelection: false,
+    idField: 'name',
+    textField: 'displayName',
     selectAllText: 'All',
     enableCheckAll: true,
     unSelectAllText: 'Unselect All',
-    itemsShowLimit: 2, // Number of items to display in the dropdown before showing "Show All"
+    itemsShowLimit: 2,
     allowRemoteDataSearch: false,
   };
 
@@ -35,52 +35,36 @@ export class WorkoutUserListComponent {
     'Total Workout Minutes',
   ];
 
-  userWorkoutData!: UserWorkoutListDataModel[]; //actual data without filter
-  formattedWorkoutList!: FormattedWorkoutListModel[]; //filtered data
+  userWorkoutData!: UserWorkoutListDataModel[]; // All fetched data
+  formattedWorkoutList!: FormattedWorkoutListModel[]; // Filtered & paginated data
+
+  curPageNo = 1;
+  totalPages = 1;
+  pageSize = 5; // Default page size
 
   constructor(private workoutApiServices: WorkoutApiServices) {}
 
   ngOnInit() {
-    //fetching the user work data on page load
     this.userWorkoutData = this.workoutApiServices.getAllWorkoutData();
-    this.formatUserWorkoutData(this.userWorkoutData);
-    this.workoutTypeOptions = WorkoutConfig.WORKOUT_TYPE_OPTION;
+    this.applyFilter();
   }
 
   onItemSelect(item: any) {
     this.applyFilter();
   }
 
-  //formats user's workout data as per table structure
-  formatUserWorkoutData(data: UserWorkoutListDataModel[]) {
-    this.formattedWorkoutList = data.map((user) => {
-      return {
-        userName: user.userName,
-        workouts: user.workouts.map((workout) => workout.type).join(', '),
-        totalWorkouts: user.workouts.length,
-        totalWorkoutDuration: user.workouts.reduce(
-          (sum, workout) => sum + workout.minutes,
-          0
-        ),
-      };
-    });
-  }
-
-  // This function applies the filter based on user input and formats the filtered data
   applyFilter() {
     let filteredData = this.userWorkoutData;
 
-    // Filter by userName (case insensitive)
+    // Filter by userName
     if (this.filter.userName) {
       filteredData = filteredData.filter((user) =>
         user.userName.toLowerCase().includes(this.filter.userName.toLowerCase())
       );
     }
 
-    // Extract selected workout names from the array of objects
+    // Filter by workoutType
     const selectedWorkoutNames = this.filter.workoutType.map((w) => w.name);
-
-    // Filter by workoutType (selected workout names array)
     if (selectedWorkoutNames.length > 0) {
       filteredData = filteredData.filter((user) =>
         user.workouts.some((workout) =>
@@ -89,7 +73,39 @@ export class WorkoutUserListComponent {
       );
     }
 
-    // After filtering, format the data
-    this.formatUserWorkoutData(filteredData);
+    // Update total pages dynamically
+    this.totalPages = Math.ceil(filteredData.length / this.pageSize);
+
+    // Apply pagination after filtering
+    this.updatePaginatedData(filteredData);
+  }
+
+  updatePaginatedData(data: UserWorkoutListDataModel[]) {
+    const startIndex = (this.curPageNo - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.formatUserWorkoutData(data.slice(startIndex, endIndex));
+  }
+
+  formatUserWorkoutData(data: UserWorkoutListDataModel[]) {
+    this.formattedWorkoutList = data.map((user) => ({
+      userName: user.userName,
+      workouts: user.workouts.map((workout) => workout.type).join(', '),
+      totalWorkouts: user.workouts.length,
+      totalWorkoutDuration: user.workouts.reduce(
+        (sum, workout) => sum + workout.minutes,
+        0
+      ),
+    }));
+  }
+
+  handlePageChange(pageNo: number) {
+    this.curPageNo = pageNo;
+    this.applyFilter();
+  }
+
+  handlePageSizeChange(newSize: number) {
+    this.pageSize = newSize;
+    this.curPageNo = 1; // Reset to first page
+    this.applyFilter();
   }
 }
