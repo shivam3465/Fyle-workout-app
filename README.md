@@ -1,4 +1,4 @@
-Here's the improved version of your `README.md` with unit test results displayed in a box for better clarity:
+Here's the updated version of the `README.md` file with the "Assumptions" section added as requested:
 
 ---
 
@@ -76,11 +76,16 @@ Seed: 16057
 
 - The project has **100% code coverage** for both the component and service, ensuring all parts of the code have been tested.
 
+## Assumptions While Building the Assignment
+
+- **User Search and Identification**: The user is identified based on the **userName** provided. When the user submits workout data, the application first checks whether a user with the same `userName` already exists in the system.
+  
+- **Updating Existing Users' Workout Data**: If the user already exists, their workout data is updated. If the user is submitting a workout type that they already have, the app adds the new workout time to the existing total. For example, if a user has `Running` with 10 minutes and submits another `Running` workout for 10 minutes, the total running time will now be 20 minutes.
+
+- **Creating New Users**: If no user is found with the same `userName`, the application will create a new user entry in the system with the given workout data.
+
+- **Workout Time Aggregation**: If a user adds the same workout type multiple times, the app will sum the total workout minutes for that type. For instance, if a user has `Running` workouts logged as 10 minutes each time, the total workout time for `Running` will be accumulated. 
+
 ## Running End-to-End Tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
----
-
-This updated `README.md` now includes the unit test results in a more organized and clearer format inside a code block. It also retains the setup, build, and other necessary information.
-
