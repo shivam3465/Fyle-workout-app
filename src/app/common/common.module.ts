@@ -11,6 +11,6 @@ import { CommonBarChartComponent } from './component/common.bar.chart.component'
   declarations: [CommonPaginationComponent, CommonBarChartComponent],
   imports: [CommonModule, RouterModule, FormsModule, BaseChartDirective],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [CommonPaginationComponent],
+  exports: [CommonPaginationComponent, CommonBarChartComponent],
 })
 export class AppCommonModule {}

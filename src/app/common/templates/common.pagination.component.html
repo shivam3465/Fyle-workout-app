@@ -6,7 +6,7 @@
   <div class="flex items-center gap-2">
     <!-- Previous Button -->
     <button
-      class="px-3 py-2 text-sm rounded-md border border-[#e4e4e4] bg-blue-50 hover:bg-blue-100 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+      class="px-3 py-2 text-sm rounded-md border border-[#dbdbdb] bg-blue-50 hover:bg-blue-100 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
       (click)="jumpToPage(curPageNo - 1)"
       [disabled]="curPageNo == 1"
     >
@@ -17,8 +17,8 @@
     <ng-container *ngFor="let i of pagesArray">
       <button
         (click)="jumpToPage(i)"
-        class="px-3 py-2 text-sm rounded-md border border-[#e4e4e4] hover:bg-[#ff2e62] hover:text-white cursor-pointer"
-        [ngClass]="{ 'bg-[#ff2e62] text-white': curPageNo === i }"
+        class="px-3 py-2 text-sm bg-white rounded-md border border-[#e4e4e4] hover:bg-[#ff2e62] hover:text-white cursor-pointer"
+        [ngClass]="{ 'bg-[#ff2e62] text-black': curPageNo === i }"
       >
         {{ i }}
       </button>
@@ -39,7 +39,7 @@
     <label for="pagination-items-per-page">Items per page</label>
     <select
       id="pagination-items-per-page"
-      class="w-20 px-3 py-2 outline-0 border border-[#eaeaea] rounded-md text-sm"
+      class="w-20 px-3 py-2 outline-0 border border-[#eaeaea] rounded-md text-sm bg-white"
       [ngModel]="selectedPageSize"
       (change)="updatePageSize($event)"
     >

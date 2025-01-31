@@ -5,6 +5,7 @@ export interface UserWorkoutInputDataModel {
 }
 
 export interface FormattedWorkoutListModel {
+  id: number;
   userName: string;
   workouts: string;
   totalWorkouts: number;

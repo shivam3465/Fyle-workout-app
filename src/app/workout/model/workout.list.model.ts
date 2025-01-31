@@ -21,3 +21,13 @@ export class WorkoutTypes {
     this.minutes = data.minutes ?? 0;
   }
 }
+
+export class UserDataList {
+  userId: number;
+  userName: string;
+
+  constructor(data: any) {
+    this.userId = data.userId ?? 0;
+    this.userName = data.userName ?? '';
+  }
+}

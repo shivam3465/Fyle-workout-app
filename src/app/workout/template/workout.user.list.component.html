@@ -1,4 +1,4 @@
-<div class="w-full min-h-screen pt-[50px] mb-12">
+<div class="w-full min-h-screen pt-[50px] pb-[60px] bg-[#f2f2f2eb]">
   <h2 class="text-center text-[28px] text-[#ff2e62] mb-6 mt-4 font-semibold">
     User's Workout List
   </h2>
@@ -43,7 +43,7 @@
 
   <!-- user table section  -->
   <div
-    class="w-[90%] mx-auto max-w-[1240px] shadow-md shadow-[#d3d3d3] rounded-b-md overflow-hidden"
+    class="w-[90%] mx-auto max-w-[1240px] shadow-md shadow-[#d3d3d3] rounded-b-md overflow-hidden bg-white"
   >
     <table class="w-full">
       <thead
@@ -59,7 +59,8 @@
       <tbody *ngIf="formattedWorkoutList && formattedWorkoutList.length">
         <tr
           *ngFor="let item of formattedWorkoutList"
-          class="text-center border-b-[1px] border-[#e8e8e8]"
+          (click)="goToUserDetails(item.id)"
+          class="text-center border-b-[1px] border-[#e8e8e8] hover:cursor-pointer hover:text-blue-400"
         >
           <td class="p-3">{{ item.userName }}</td>
           <td class="p-3">{{ item.workouts }}</td>

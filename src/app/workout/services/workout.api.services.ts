@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core';
 import { UtilService } from '../../common/services/util.service';
 import { WorkoutConfig } from '../../common/constants/workout.config';
 
-import { UserWorkoutListDataModel } from './../model/workout.list.model';
+import {
+  UserDataList,
+  UserWorkoutListDataModel,
+} from './../model/workout.list.model';
 import { UserWorkoutInputDataModel } from '../model/workout.model';
 
 @Injectable()
@@ -62,5 +65,29 @@ export class WorkoutApiServices {
     if (!allWorkoutData) return [];
 
     return allWorkoutData;
+  }
+
+  getUserWorkoutById(id: number): UserWorkoutListDataModel | null {
+    let allWorkoutData: UserWorkoutListDataModel[] = UtilService.getItem(
+      WorkoutConfig.WORKOUT_LIST_KEY
+    );
+
+    if (!allWorkoutData) return null;
+
+    return allWorkoutData.find((user) => user.id === id) || null;
+  }
+
+  getAllUsersData(): UserDataList[] {
+    let allWorkoutData: UserWorkoutListDataModel[] = UtilService.getItem(
+      WorkoutConfig.WORKOUT_LIST_KEY
+    );
+
+    if (!allWorkoutData) return [];
+
+    // Return an array of objects with userId and userName
+    return allWorkoutData.map((user) => ({
+      userId: user.id,
+      userName: user.userName,
+    }));
   }
 }

@@ -7,12 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './component/main.component';
 import { MainRouting } from './main.routing';
 import { MainHeaderComponent } from './component/main.header.component';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @NgModule({
-  declarations: [
-    MainComponent,
-    MainHeaderComponent
-  ],
+  declarations: [MainComponent, MainHeaderComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -21,6 +19,7 @@ import { MainHeaderComponent } from './component/main.header.component';
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: [provideCharts(withDefaultRegisterables())],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [MainComponent],
 })

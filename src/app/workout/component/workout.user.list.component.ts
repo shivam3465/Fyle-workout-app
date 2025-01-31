@@ -4,6 +4,7 @@ import { UserWorkoutListDataModel } from '../model/workout.list.model';
 import { FormattedWorkoutListModel } from '../model/workout.model';
 import { WorkoutConfig } from '../../common/constants/workout.config';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-user-list',
@@ -42,11 +43,19 @@ export class WorkoutUserListComponent {
   totalPages = 1;
   pageSize = 5; // Default page size
 
-  constructor(private workoutApiServices: WorkoutApiServices) {}
+  constructor(
+    private workoutApiServices: WorkoutApiServices,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.userWorkoutData = this.workoutApiServices.getAllWorkoutData();
     this.applyFilter();
+  }
+
+  // Navigate to details page on row click
+  goToUserDetails(userId: number) {
+    this.router.navigate(['/details'], { queryParams: { id: userId } });
   }
 
   onItemSelect(item: any) {
@@ -88,6 +97,7 @@ export class WorkoutUserListComponent {
 
   formatUserWorkoutData(data: UserWorkoutListDataModel[]) {
     this.formattedWorkoutList = data.map((user) => ({
+      id: user.id,
       userName: user.userName,
       workouts: user.workouts.map((workout) => workout.type).join(', '),
       totalWorkouts: user.workouts.length,
