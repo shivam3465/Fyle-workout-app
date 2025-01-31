@@ -9,6 +9,8 @@ import { WorkoutApiServices } from './services/workout.api.services';
 import { WorkoutUserListComponent } from './component/workout.user.list.component';
 import { WorkoutDetailComponent } from './component/workout.detail.component';
 import { AppCommonModule } from '../common/common.module';
+import { UtilService } from '../common/services/util.service';
+import { WorkoutConfig } from '../common/constants/workout.config';
 
 @NgModule({
   declarations: [
@@ -28,4 +30,16 @@ import { AppCommonModule } from '../common/common.module';
   providers: [WorkoutApiServices],
   exports: [],
 })
-export class WorkoutModule {}
+export class WorkoutModule {
+  constructor() {
+    const previousData = UtilService.getItem(WorkoutConfig.WORKOUT_LIST_KEY);
+
+    //storing initial user data in local storage if not already stored
+    if (!previousData) {
+      UtilService.setItem(
+        WorkoutConfig.WORKOUT_LIST_KEY,
+        WorkoutConfig.INITIAL_USER_DATA
+      );
+    }
+  }
+}
