@@ -1,7 +1,3 @@
-Here's the updated version of the `README.md` file with the "Assumptions" section added as requested:
-
----
-
 # FYLE Workout App
 
 ## Project Setup
